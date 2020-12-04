@@ -1,0 +1,65 @@
+﻿@*@using microsoft.aspnetcore.identity
+    @using atomhealth.areas.identity.data
+
+    @inject signinmanager<atomhealthuser> signinmanager
+    @inject usermanager<atomhealthuser> usermanager
+
+    @if (signinmanager.issignedin(user))
+    {
+        <div class="navbar-nav col-md-12 col-sm-12">
+            <div class="navlinkslogin">
+                <a id="manage" class="nav-link text-dark" asp-area="identity" asp-page="/account/manage/index" title="manage">hello @usermanager.getusername(user)!</a>
+                <a id="manage" class="nav-link text-dark" asp-area="identity" asp-page="/account/manage/index" title="manage">manage profile</a>
+                <form id="logoutform" class="form-inline" asp-area="identity" asp-page="/account/logout" asp-route-returnurl="@url.action("index", "home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">logout</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="navlinks" style="display:none"></div>
+    }
+    @if (signinmanager.issignedin(user) && user.isinrole("admin"))
+    {
+        <div class="navbar-nav col-md-12 col-sm-12">
+            <div class="navlinkslogin">
+                <a id="manage" class="nav-link text-dark" asp-action="index" asp-controller="userrolemanagement">configure user roles</a>
+            </div>
+
+        </div>
+        <div class="navlinks" style="display:none"></div>
+    }
+    else
+    {
+
+        <div class="navlinks">
+            <div class="signinoutlink">
+                <a style="padding-right:10px; border-right: 2px solid #42a5ff;" id="register" asp-area="identity" asp-page="/account/login">signin   </a>
+                <a style="padding-left:10px;" id="login" asp-area="identity" asp-page="/account/register">signup</a>
+            </div>
+
+            <ul class="navbar-nav col-md-12 col-sm-12">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="index">home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="oursolution">our solution</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="joinus">join us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="faq">faq</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="contactus">contact us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="home" asp-action="news">health news</a>
+                </li>
+
+
+            </ul>
+        </div>
+    }*@
